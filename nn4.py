@@ -1,9 +1,11 @@
 #coding:utf-8
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-#import MNIST_data.input_data as input_data
 import time
 
+start = time.clock() #计算开始时间
+mnist = input_data.read_data_sets("./data/mnist/input_data/", one_hot=True)
+ #MNIST数据输入
 """
 权重初始化
 初始化为一个接近0的很小的正数
@@ -41,9 +43,6 @@ def max_pool_2x2(x):
     # ksize(pool大小)        : A list of ints that has length >= 4. The size of the window for each dimension of the input tensor.
     # strides(pool滑动大小)   : A list of ints that has length >= 4. The stride of the sliding window for each dimension of the input tensor.
 
-start = time.clock() #计算开始时间
-mnist = input_data.read_data_sets("./data/mnist/input_data/", one_hot=True)
- #MNIST数据输入
 
 """
 第一层 卷积层
@@ -125,7 +124,6 @@ merged = tf.summary.merge_all()
 sess = tf.Session() #启动创建的模型
 train_writer = tf.summary.FileWriter('./train', sess.graph)
 
-#sess.run(tf.initialize_all_variables()) #旧版本
 sess.run(tf.global_variables_initializer()) #初始化变量
 
 for i in range(200): #开始训练模型，循环训练5000次
